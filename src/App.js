@@ -9,16 +9,16 @@ function App() {
   const tareaNombreRef = useRef()
 
   useEffect( () => {
-    const tareasGuardadas = JSON.parse(localStorage.getItem 
+    const tareasGuardadas = JSON.parse(localStorage.getItem
     (ALMACENAMIENTO_LOCAL_KEY))
     if (tareasGuardadas) setTareas (tareasGuardadas)
     }, [])
-    
+
 
   useEffect( () => {
     localStorage.setItem(ALMACENAMIENTO_LOCAL_KEY, JSON.stringify(tareas))
     }, [tareas])
-    
+
 
   function agregarTarea(e){
     const nombre = tareaNombreRef.current.value
@@ -28,10 +28,21 @@ function App() {
     })
     tareaNombreRef.current.value = null
   }
-  
+
+  function marcadoTarea(id) {
+
+    const nuevaListaTareas = [...tareas]
+
+    const tarea = nuevaListaTareas.find(tarea => tarea.id === id)
+
+    tarea.completado = !tarea.completado
+
+    setTareas(nuevaListaTareas)
+  }
+
   return (
     <>
-    <TareasLista tareas={tareas}/>
+    <TareasLista tareas={tareas} marcadoTarea={marcadoTarea} />
     <input ref={tareaNombreRef} type="text" />
     <button onClick={agregarTarea}>Añadir Tarea</button>
     <button>Limpiar Tareas Completadas</button>
