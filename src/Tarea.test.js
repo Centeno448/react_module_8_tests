@@ -24,7 +24,7 @@ test('Tarea despliega el nombre de la tarea dentro de un label | Asegúrate de q
   expect(checkbox.prop('checked')).toBe(tarea.completado);
 });
 
-test('Tarea maneja el click en el checkbox | Asegúrate de que Tarea maneje el click en su checkbox utilizando una función llamada "manejoTareaClic" que llame a la funcion manejoTarea pasada en el prop con el id de la tarea', () => {
+test('Tarea maneja el click en el checkbox | Asegúrate de que Tarea maneje el click en su checkbox utilizando una función llamada "manejoTareaClic" que llame a la funcion manejoTarea pasada en el prop "marcadoTarea" con el id de la tarea', () => {
   const mockFun = jest.fn();
   const wrapper = shallow(<Tarea tarea={tarea} marcadoTarea={mockFun} />);
   const div = wrapper.find('div');
